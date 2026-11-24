@@ -564,3 +564,5 @@ settled_utc,run_date,comp,match_id,kickoff_utc,league,home,away,score
 2026-11-23T06:11:07Z,2026-11-22,women,00e194286da0,2026-11-22T14:00:00Z,Damallsvenskan_Sweden,Rosengård W,KIF Örebro W,3-3
 2026-11-23T06:11:07Z,2026-11-22,women,3f762851f282,2026-11-22T13:00:00Z,Frauen_Bundesliga,SC Freiburg W,Stuttgart W,2-0
 2026-11-23T06:11:07Z,2026-11-22,women,07947de22012,2026-11-22T11:30:00Z,Serie_A_Women_Italy,Ternana W,Inter Milano W,0-4
+2026-11-24T06:08:39Z,2026-11-22,leagues,0c0a97d4302a,2026-11-22T23:30:00Z,MLS,Chicago Fire,Charlotte,1-2
+2026-11-24T06:08:39Z,2026-11-22,leagues,72e351f927d3,2026-11-22T23:30:00Z,Chile_Primera_Division,Deportes Limache,D. La Serena,1-2
