@@ -3,6 +3,32 @@
 Corrections, newest first. A published row is never edited or deleted; if something is wrong it
 is stated here, and the corrected value is added as a new row.
 
+## 2026-11-25 — early picks were left out of this ledger
+
+Since 1 November 2026 the website has published a second list of picks, the early picks, ahead of
+the day's main board. None of them reached this repository: the upload only read the main board
+and the legs backed from it. Nobody decided to leave them out. The upload missed them, and the
+record here was incomplete because of it.
+
+- **From 25 November 2026, 08:17 UTC, every early pick is committed before kickoff**, in the same
+  way as the main board. Each kickoff date has its own commitment,
+  `commitments/early/<date>.<batch>.sha256`. Its rows are released to `early.csv` in that date's
+  week folder once the date's matches are final, and graded rows go to `early_settled.csv`.
+  `tools/verify.py` checks every released batch against its hash.
+- **The 103 early picks with a kickoff between 20 November and that moment are in `early.csv`
+  with the others, marked `uncommitted` in the `batch` column.** The website published them but
+  the upload missed them, so they were never committed here: 75 from leagues, 27 from cups and 1
+  from women's football, kicking off from 20 November 17:00 UTC to 25 November 03:00 UTC. Their
+  `posted_utc`, the time the website first listed each one, comes from our own system and nothing
+  here proves it. They are included, winners and losers alike, because a record that dropped
+  every pick it could not prove would be a selected record. `tools/verify.py` counts them with
+  the other early picks and also shows them on their own.
+- **The 154 early picks with a kickoff from 1 to 19 November are not added.** The website's
+  current track record starts on 20 November 2026, and the early picks here start on the same
+  date.
+- If an early pick is ever listed too close to kickoff to be committed in time, it is added to
+  `early.csv` the same way, marked `uncommitted`, once its match is over.
+
 ## 2026-09-27 — predictions from 25 to 27 Sep that were never committed
 
 On 25 Sep the upload released the 24 Sep predictions and the three fixtures committed early for 25 Sep. It then

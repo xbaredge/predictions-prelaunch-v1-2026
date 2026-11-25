@@ -193,6 +193,48 @@ columns above — with `m = 2 × settle_frac − 1`, it is `m × (odds − 1)` w
 `m` when it is negative — so publishing it would only add somewhere for the arithmetic to be
 wrong. It was: see the 2026-09-21 entry in `ERRATA.md`. `tools/verify.py` computes it.
 
+## Early picks
+
+The website publishes a second list of picks ahead of the day's main board: the early picks.
+They are committed in the same way as the board, on files of their own.
+
+Several times a day, after the list is updated, the early picks that no commitment covers yet and
+whose kickoff is more than ten minutes away are hashed, one batch per kickoff date (UTC):
+`commitments/early/<date>.<batch>.sha256`. Once every match kicking off on that date is final,
+the rows are released to `early.csv` in the date's week folder. `tools/verify.py` rebuilds each
+batch from the rows carrying its `batch` value, in file order, and compares the hash.
+
+The columns of `early.csv`:
+
+| column | meaning |
+|---|---|
+| `batch` | the commitment the row belongs to, `<date>.<batch>`, or `uncommitted` (see below) |
+| `committed_utc` | when the hash was published. The proof covers this time: the row existed, unchanged, by then |
+| `posted_utc` | when the website first listed the pick, from our own clock. Nothing here proves it |
+| `pick` | the pick as the website showed it: a team and a handicap line (`Derby +0.5`), or a goals line (`Under 3.5`) |
+| `min_odds` | the lowest price the pick was published at. Anyone who took it was paid this or more |
+| `star` | 1 where the website marked the pick ✦ |
+| `salt` | 32 random hex characters. An early pick has only a few fields, so without a salt a small batch could be found by hashing every likely pick and price until one matched |
+
+`comp`, `match_id`, `kickoff_utc`, `league`, `home` and `away` mean what they mean in the other
+files.
+
+**Rows marked `uncommitted`.** A row whose `batch` reads `uncommitted` is an early pick the
+website published that was never committed here before kickoff, because the upload missed it.
+Its `committed_utc` and `salt` are blank and its timing cannot be checked. These rows are
+published, winners and losers alike, so that leaving them out cannot flatter the record, and
+`tools/verify.py` shows the early record with them and without them. `ERRATA.md` (25 November
+2026) explains how they came about.
+
+`early_settled.csv` grades each pick once the match is over, under the same `batch`. `result` is
+the website's wording: `Landed`, `Half landed`, `Half missed`, `Missed` or `Void`. `settle_frac`
+is the fraction of the stake that won, on the five-value scale above, and `score` is the final
+score.
+
+`tools/verify.py` gives the early hit rate the way the website counts it, where a half result is
+half a leg and a void is left out. Beside it is the rate the minimum prices imply. It gives no
+return figure for early picks.
+
 ## Limits worth stating
 
 - Exchange prices are shown before commission, and the available stake at that price may have

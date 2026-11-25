@@ -39,11 +39,17 @@ commitments/           the SHA-256 of each day's predictions, published before k
 2026/W38/picks.csv     the legs the system backed, with the odds taken and two reference prices
 2026/W38/results.csv   the final score of every fixture on the board, added after the match
 2026/W38/settled.csv   backed legs graded, with the reference prices near kickoff and CLV
+commitments/early/     the SHA-256 of each day's early picks, published before kickoff
+2026/W48/early.csv     early picks, published ahead of the main board, released after the matches †
+2026/W48/early_settled.csv   early picks graded, with the final score
 stamps/                timestamp proofs, one per upload
 tools/verify.py        recomputes the record from the files in this repo alone
 ```
 
 One folder per ISO week. Each upload appends; a published line never changes.
+
+† Rows marked `uncommitted` in the `batch` column of `early.csv` were published on the website
+but missed by the upload, so they have no commitment. See `ERRATA.md`, 25 November 2026.
 
 ## Verify it yourself
 
@@ -72,6 +78,18 @@ ots verify stamps/2026/2026-09-18T070500Z.sha256.ots
 gives the final score of each one. Between them you can grade **any** market on the board
 yourself, rather than taking our word for the legs we chose to settle. A record of winning bets
 alone can always be assembled after the fact; a full board with scores cannot.
+
+## Early picks
+
+The website also publishes early picks, ahead of the day's main board. They have their own files
+and their own commitments (`commitments/early/`, one per kickoff date) and work the same way: a
+hash before kickoff, the rows once the matches are over. An early pick is the pick as the website
+showed it, with the **minimum** price it was published at. `tools/verify.py` reports them
+separately from the main picks.
+
+Early picks were missing from this ledger until 25 November 2026. The ones the website published
+from 20 November until then are in `early.csv` like the rest, marked `uncommitted` because they
+have no commitment. `ERRATA.md` has the details.
 
 ## What these numbers are not
 

@@ -3,6 +3,22 @@
 Model and format changes, newest first. Published rows are never rewritten, so this file is how
 a change in meaning is announced.
 
+## 2026-11-25 — early picks
+
+The website's early picks are now part of the ledger, on files of their own. They were missing
+until today; `ERRATA.md` says what that covers.
+
+- **`commitments/early/<date>.<batch>.sha256`**: the SHA-256 of the early picks kicking off on
+  `<date>` (UTC), published before the first of them kicks off. Early picks are listed at
+  several times of day, so one date can have several batches.
+- **`early.csv`**, in the week folder of the kickoff date: the early picks, released once that
+  date's matches are final. Columns: `batch`, `committed_utc`, `posted_utc`, `comp`, `match_id`,
+  `kickoff_utc`, `league`, `home`, `away`, `pick`, `min_odds`, `star`, `salt`. A row whose
+  `batch` reads `uncommitted` was published on the website but never committed here; see
+  `ERRATA.md`.
+- **`early_settled.csv`**, same folder: each early pick graded, with the final score.
+- **`tools/verify.py`** checks the early commitments and reports the early picks on their own.
+
 ## 2026-10-03 — a licence, and our own match key from 2026-W41
 
 - **`LICENSE.md` added.** The ledger is published so it can be checked: you may read, clone and

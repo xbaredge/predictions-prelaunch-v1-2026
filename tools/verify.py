@@ -8,6 +8,8 @@ No dependencies, no network. It checks the promises this repo makes, then prints
   1. every published row pre-dates its own kickoff
   2. no fixture or leg is published twice
   3. every settled row points at a leg that was published first
+  4. every released early pick matches the hash committed before its kickoff; early picks added
+     late, with no commitment, are reported apart and never counted with the committed ones
 
 Whether the timestamps are honest is a separate question, and not one this script can answer:
 check the commit dates with `git log`, and the OpenTimestamps proofs in stamps/ with
@@ -100,6 +102,139 @@ def commitments(repo):
                 out.append((date, b, name, "released" if got == want else "MISMATCH",
                             n, len(take)))
     return out
+
+
+# `batch` of an early pick that was published on the website but never committed here before kickoff (see ERRATA.md).
+UNCOMMITTED = "uncommitted"
+# How a settlement counts towards the hit rate, as the website counts it: a half result is half a leg, a void is out.
+EARLY_SCORE = {"Landed": (1.0, 1.0), "Half landed": (0.5, 0.5), "Missed": (0.0, 1.0),
+               "Half missed": (0.0, 0.5), "Void": (0.0, 0.0)}
+
+
+def early_files(repo, name):
+    """(path, header, rows) of every weekly file called `name`, in path order."""
+    out = []
+    for p in sorted(glob.glob(os.path.join(repo, "[0-9]" * 4, "W[0-9][0-9]", name))):
+        with open(p, newline="") as f:
+            rd = csv.DictReader(f)
+            out.append((p, rd.fieldnames, list(rd)))
+    return out
+
+
+def early_commitments(repo):
+    """Check every released early pick against the hash published before its kickoff.
+
+    Early picks are published ahead of the main board. Each
+    `commitments/early/<date>.<batch>.sha256` covers the early picks kicking off on <date> (UTC) that no earlier batch
+    covered, and was published before any of them kicked off. Once that date's matches are final the rows are released
+    to `early.csv` in the date's week folder, each carrying its batch and a random salt (so a small batch cannot be
+    guessed from its hash). This rebuilds each batch's exact bytes - its rows, in file order, under the file's header -
+    and compares. Returns (batch, state, n_committed, n_released) and a list of problems."""
+    released, header, problems = defaultdict(list), {}, []
+    for path, cols, rows in early_files(repo, "early.csv"):
+        for r in rows:
+            if r["batch"] == UNCOMMITTED:       # no commitment to check; reported on its own by early()
+                continue
+            released[r["batch"]].append(r)
+            header[r["batch"]] = cols
+    out, seen = [], set()
+    for man in sorted(glob.glob(os.path.join(repo, "commitments", "early", "*.sha256"))):
+        batch = os.path.basename(man)[:-len(".sha256")]
+        seen.add(batch)
+        lines = [ln.split() for ln in open(man) if ln.strip() and not ln.startswith("#")]
+        if len(lines) != 1 or len(lines[0]) != 3:
+            problems.append(f"early commitment {batch}: unreadable")
+            continue
+        want, _name, n = lines[0][0], lines[0][1], int(lines[0][2])
+        take = released.get(batch, [])
+        if not take:
+            out.append((batch, "embargoed", n, 0))
+            continue
+        buf = io.StringIO()
+        w = csv.DictWriter(buf, fieldnames=header[batch], lineterminator="\n")
+        w.writeheader()
+        for r in take:
+            w.writerow(r)
+        ok = len(take) == n and hashlib.sha256(buf.getvalue().encode()).hexdigest() == want
+        out.append((batch, "released" if ok else "MISMATCH", n, len(take)))
+    for batch in sorted(set(released) - seen):
+        problems.append(f"early rows released under batch {batch}, which has no commitment")
+    return out, problems
+
+
+def early(repo, since=""):
+    """The early picks' checks and record. Every early pick is in early.csv; the ones marked `batch` = uncommitted were
+    published on the website but never committed here before kickoff (see ERRATA.md). They are counted with the rest and
+    also shown on their own, so a reader can see the record with and without them: only the committed ones carry proof
+    that they were fixed before kickoff."""
+    problems = []
+    rows_all = [r for _p, _c, rs in early_files(repo, "early.csv") for r in rs]
+    committed = [r for r in rows_all if r["batch"] != UNCOMMITTED]
+    late = [r for r in rows_all if r["batch"] == UNCOMMITTED]
+    settled = [r for _p, _c, rs in early_files(repo, "early_settled.csv") for r in rs]
+    if not (rows_all or settled or glob.glob(os.path.join(repo, "commitments", "early", "*.sha256"))):
+        return problems
+    for r in committed:
+        if not (r["posted_utc"] <= r["committed_utc"] < r["kickoff_utc"]):
+            problems.append(f"early pick committed after kickoff: {r['batch']} {r['home']} v {r['away']} {r['pick']} "
+                            f"committed {r['committed_utc']} ko {r['kickoff_utc']}")
+    for r in late:
+        if r["committed_utc"] or r["salt"]:
+            problems.append(f"uncommitted early pick carries a commitment time or salt: {r['home']} v {r['away']} {r['pick']}")
+    seen = set()
+    for r in rows_all:
+        k = (r["match_id"], r["pick"])
+        if k in seen:
+            problems.append(f"duplicate early pick: {k}")
+        seen.add(k)
+    known = {(r["batch"], r["match_id"], r["pick"]) for r in rows_all}
+    done = set()
+    for r in settled:
+        k = (r["batch"], r["match_id"], r["pick"])
+        if k not in known:
+            problems.append(f"early settled row with no published pick: {k}")
+        if k in done:
+            problems.append(f"early pick settled twice: {k}")
+        done.add(k)
+    commits, cp = early_commitments(repo)
+    problems += cp
+    for batch, state, n_want, n_got in commits:
+        if state == "MISMATCH":
+            problems.append(f"early commitment broken: {batch} - the {n_got} released rows do not hash to the "
+                            f"commitment published before kickoff ({n_want} rows)")
+
+    rel = sum(1 for c in commits if c[1] == "released")
+    emb = [c for c in commits if c[1] == "embargoed"]
+    print(f"\nearly picks (published ahead of the main board - see METHODOLOGY.md)")
+    print(f"  released: {len(rows_all):>5} early picks, of which")
+    print(f"    committed before kickoff: {len(committed):>5}  from {rel} batch(es) matching their hash; "
+          f"{sum(c[2] for c in emb)} more in {len(emb)} batch(es) still embargoed")
+    if late:
+        print(f"    uncommitted:              {len(late):>5}  published on the website but missed by the upload; "
+              f"no proof they pre-date kickoff - see ERRATA.md")
+    for label, batch_of in (("all", lambda b: True), ("committed", lambda b: b != UNCOMMITTED),
+                            ("uncommitted", lambda b: b == UNCOMMITTED)):
+        if label == "all" and not late:
+            continue
+        keep = [r for r in settled if batch_of(r["batch"]) and r["kickoff_utc"] >= since]
+        hit = weight = implied = 0.0
+        voids = 0
+        for r in keep:
+            h, w = EARLY_SCORE.get(r["result"], (0.0, 0.0))
+            hit, weight = hit + h, weight + w
+            voids += r["result"] == "Void"
+            price = num(r["min_odds"])
+            implied += w / price if price else 0.0
+        if not keep:
+            continue
+        line = f"  {label:<11} settled {len(keep):>4}"
+        if weight:
+            line += (f"  hit rate {hit / weight * 100:.1f}%  - the minimum prices imply "
+                     f"{implied / weight * 100:.1f}%")
+        print(line + (f"  ({voids} void)" if voids else ""))
+    print("  A half result counts as half a leg and a void is left out, as on the website. The price is the MINIMUM the\n"
+          "  pick was published at; anyone who took it was paid that or more.")
+    return problems
 
 
 def key(r):
@@ -244,6 +379,8 @@ def main():
         print("\nA few dozen settled legs is a very small sample: a short-run result is "
               "mostly variance.\nOdds are the price seen at upload; exchange prices exclude "
               "commission. Estimated\nprices were never quoted by anyone — see METHODOLOGY.md.")
+    if not a.market:
+        problems += early(a.repo, a.since)
     if problems:
         print(f"\n❌ {len(problems)} problem(s):")
         for p in problems[:20]:
