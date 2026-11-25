@@ -1,0 +1,35 @@
+settled_utc,batch,match_id,kickoff_utc,home,away,pick,min_odds,score,result,settle_frac
+2026-11-25T09:12:54Z,uncommitted,ad013751432a,2026-11-23T00:59:52Z,Club Queretaro,Necaxa,Necaxa +0.75,1.81,2-2,Landed,1
+2026-11-25T09:12:54Z,uncommitted,ad013751432a,2026-11-23T00:59:52Z,Club Queretaro,Necaxa,Under 2.5,2.32,2-2,Missed,0
+2026-11-25T09:12:54Z,uncommitted,462f1018eb3f,2026-11-23T13:45:00Z,Neftchi,Al-Hilal Saudi FC,Neftchi +1.5,1.90,2-2,Landed,1
+2026-11-25T09:12:54Z,uncommitted,20efb1ff9a64,2026-11-23T16:00:00Z,Al Ain,Esteghlal FC,Esteghlal FC +1.25,1.80,1-1,Landed,1
+2026-11-25T09:12:54Z,uncommitted,56b053106d58,2026-11-23T16:00:00Z,Al Shamal,Al-Ahli Jeddah,Al Shamal +1,1.63,3-2,Landed,1
+2026-11-25T09:12:54Z,uncommitted,13f182d75d91,2026-11-23T16:00:00Z,Tractor Sazi,Al-Wasl FC,Al-Wasl FC -0,1.76,1-5,Landed,1
+2026-11-25T09:12:54Z,uncommitted,b6b6782eee74,2026-11-23T17:00:00Z,Başakşehir,Çorum FK,Çorum FK +1,1.55,4-2,Missed,0
+2026-11-25T09:12:54Z,uncommitted,b5c984f26b61,2026-11-23T17:00:00Z,NK Slaven Belupo,NK Osijek,NK Osijek -0,1.98,1-0,Missed,0
+2026-11-25T09:12:54Z,uncommitted,d366b9149be1,2026-11-23T18:15:00Z,Al Quwa Al Jawiya,Al-Gharafa,Al-Gharafa +0.5,1.87,2-1,Missed,0
+2026-11-25T09:12:54Z,uncommitted,121c03744539,2026-11-23T18:15:00Z,Al-Ittihad FC,Pakhtakor,Al-Ittihad FC -1,1.45,2-0,Landed,1
+2026-11-25T09:12:54Z,uncommitted,1be3b8272241,2026-11-23T19:00:00Z,Jong PSV U21,Jong Utrecht,Jong Utrecht +0.25,1.88,3-2,Missed,0
+2026-11-25T09:12:54Z,uncommitted,188d43438fa9,2026-11-23T19:30:00Z,AD Ceuta FC,Almeria,AD Ceuta FC +0.75,1.80,2-3,Half missed,0.25
+2026-11-25T09:12:54Z,uncommitted,dd338bee1ae0,2026-11-23T20:00:00Z,Brentford,Everton,Everton +0.25,1.97,4-0,Missed,0
+2026-11-25T09:12:54Z,uncommitted,9d5db4418ad8,2026-11-24T07:45:00Z,Newcastle Jets,Kashiwa Reysol,Newcastle Jets +1.5,1.83,1-2,Landed,1
+2026-11-25T09:12:54Z,uncommitted,72f718bca14b,2026-11-24T10:00:00Z,Daejeon Citizen,Beijing Guoan,Daejeon Citizen +0,1.83,3-2,Landed,1
+2026-11-25T09:12:54Z,uncommitted,297911933ee8,2026-11-24T10:00:00Z,Kyoto Sanga,Pohang Steelers,Pohang Steelers +1,1.87,1-0,Void,0.5
+2026-11-25T09:12:54Z,uncommitted,da52782d3a00,2026-11-24T12:15:00Z,Công An Nhân Dân,Vissel Kobe,Vissel Kobe -0,1.40,3-1,Missed,0
+2026-11-25T09:12:54Z,uncommitted,befcbff60bb5,2026-11-24T12:15:00Z,Ratchaburi,Johor Darul Takzim FC,Johor Darul Takzim FC -0.5,1.74,1-1,Missed,0
+2026-11-25T09:12:54Z,uncommitted,c858381e214f,2026-11-24T16:00:00Z,Shabab Al Ahli Dubai,Al-Qadisiyah FC,Al-Qadisiyah FC -0,1.72,1-5,Landed,1
+2026-11-25T09:12:54Z,uncommitted,95a75441bddb,2026-11-24T18:15:00Z,Al-Nassr,Al Sadd,Al Sadd +2.25,1.55,2-1,Landed,1
+2026-11-25T09:12:54Z,uncommitted,875124678c13,2026-11-24T19:00:00Z,Benevento,Empoli,Benevento -1.25,2.09,5-0,Landed,1
+2026-11-25T09:12:54Z,uncommitted,5e2721d7706d,2026-11-24T19:00:00Z,Salford City,Sunderland U21,Salford City -0.75,1.90,3-2,Half landed,0.75
+2026-11-25T09:12:54Z,uncommitted,d2db0d132fe8,2026-11-24T19:00:00Z,Tranmere,Everton U21,Tranmere -0.25,1.83,2-1,Landed,1
+2026-11-25T09:12:54Z,uncommitted,27b22b0c6b44,2026-11-24T19:00:00Z,Vicenza Virtus,Carrarese,Carrarese -0,1.75,0-1,Landed,1
+2026-11-25T09:12:54Z,uncommitted,3f699ce31bdb,2026-11-24T19:45:00Z,Bristol City,Wrexham,Bristol City +0,1.90,1-1,Void,0.5
+2026-11-25T09:12:54Z,uncommitted,483e5538187d,2026-11-24T19:45:00Z,Cardiff,Preston,Cardiff -1,1.90,0-4,Missed,0
+2026-11-25T09:12:54Z,uncommitted,4b7378cb6574,2026-11-24T19:45:00Z,Hibernian,Dundee,Hibernian -0.75,1.80,2-1,Half landed,0.75
+2026-11-25T09:12:54Z,uncommitted,fda7c6312fdd,2026-11-24T19:45:00Z,Norwich,QPR,QPR +0.5,1.98,1-1,Landed,1
+2026-11-25T09:12:54Z,uncommitted,24ff12318494,2026-11-24T19:45:00Z,Sheffield Utd,Southampton,Sheffield Utd +0.25,1.75,1-1,Half landed,0.75
+2026-11-25T09:12:54Z,uncommitted,5899978c8dfd,2026-11-24T19:45:00Z,Stevenage,Sheffield Wednesday,Stevenage +0.25,1.79,0-0,Half landed,0.75
+2026-11-25T09:12:54Z,uncommitted,2a4e686ea467,2026-11-24T20:00:00Z,Como,AEK Athens FC,AEK Athens FC +1.75,1.92,1-0,Landed,1
+2026-11-25T09:12:54Z,uncommitted,bfb6402f09a9,2026-11-24T20:00:00Z,Rangers,Aberdeen,Aberdeen +1.75,2.02,3-2,Landed,1
+2026-11-25T09:12:54Z,uncommitted,a41841202676,2026-11-24T20:00:00Z,Real Madrid,PSV Eindhoven,Real Madrid -1.5,1.40,5-1,Landed,1
+2026-11-25T09:12:54Z,uncommitted,408f96102bd8,2026-11-24T21:00:00Z,Chapecoense-sc,Palmeiras,Chapecoense-sc +0.75,1.73,3-0,Landed,1
