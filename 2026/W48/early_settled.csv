@@ -48,3 +48,11 @@ settled_utc,batch,match_id,kickoff_utc,home,away,pick,min_odds,score,result,sett
 2026-11-26T06:08:53Z,2026-11-25.1,6552380a8893,2026-11-25T20:00:00Z,Shakhtar Donetsk,Fenerbahçe,Fenerbahçe -0,1.88,0-1,Landed,1
 2026-11-26T06:08:53Z,2026-11-25.1,306f036c1911,2026-11-25T20:00:00Z,Sporting CP,Manchester United,Manchester United +0.25,1.78,2-2,Half landed,0.75
 2026-11-26T06:08:53Z,2026-11-25.2,3aaf75d40f0c,2026-11-25T20:00:00Z,Stoke City,Millwall,Stoke City -0.25,1.98,2-1,Landed,1
+2026-11-27T06:13:21Z,2026-11-26.1,f5e6472aee98,2026-11-26T17:45:00Z,Celta Vigo,Bournemouth,Celta Vigo +1,1.46,1-2,Void,0.5
+2026-11-27T06:13:21Z,2026-11-26.1,18d78bd9650c,2026-11-26T17:45:00Z,Marseille,Levski Sofia,Marseille -1,1.62,1-0,Void,0.5
+2026-11-27T06:13:21Z,2026-11-26.1,34fe9f9f8b04,2026-11-26T19:59:59Z,SC Braga,KuPS,Under 3.5,1.86,4-0,Missed,0
+2026-11-27T06:13:21Z,2026-11-26.1,49cfbdba046f,2026-11-26T20:00:00Z,Doncaster,Huddersfield,Doncaster +1.75,1.30,2-3,Landed,1
+2026-11-27T06:13:21Z,2026-11-26.1,a8573eadf7c5,2026-11-26T20:00:00Z,Juventus,Omonia Nicosia,Juventus -1.5,1.63,4-1,Landed,1
+2026-11-27T06:13:21Z,2026-11-26.1,37b778c9513d,2026-11-26T20:00:00Z,Inter Club d'Escaldes,FC Copenhagen,FC Copenhagen -1.5,1.82,2-0,Missed,0
+2026-11-27T06:13:21Z,2026-11-26.1,8d305effe23a,2026-11-26T20:00:00Z,Sunderland,Jagiellonia,Sunderland -1.75,1.95,1-1,Missed,0
+2026-11-27T06:13:21Z,2026-11-26.1,bafb6cc0079e,2026-11-26T20:00:00Z,Gent,FK Crvena Zvezda,Gent +0.5,1.38,1-1,Landed,1
