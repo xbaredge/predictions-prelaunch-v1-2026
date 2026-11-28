@@ -56,3 +56,10 @@ settled_utc,batch,match_id,kickoff_utc,home,away,pick,min_odds,score,result,sett
 2026-11-27T06:13:21Z,2026-11-26.1,37b778c9513d,2026-11-26T20:00:00Z,Inter Club d'Escaldes,FC Copenhagen,FC Copenhagen -1.5,1.82,2-0,Missed,0
 2026-11-27T06:13:21Z,2026-11-26.1,8d305effe23a,2026-11-26T20:00:00Z,Sunderland,Jagiellonia,Sunderland -1.75,1.95,1-1,Missed,0
 2026-11-27T06:13:21Z,2026-11-26.1,bafb6cc0079e,2026-11-26T20:00:00Z,Gent,FK Crvena Zvezda,Gent +0.5,1.38,1-1,Landed,1
+2026-11-28T06:30:01Z,2026-11-27.1,66a23689b053,2026-11-27T17:00:00Z,Rizespor,Kasımpaşa,Rizespor +0,1.48,3-2,Landed,1
+2026-11-28T06:30:01Z,2026-11-27.1,6a77e5b1facc,2026-11-27T17:30:00Z,1. FC Heidenheim,1. FC Nürnberg,1. FC Heidenheim +0.5,1.41,3-1,Landed,1
+2026-11-28T06:30:01Z,2026-11-27.1,74aa0f562923,2026-11-27T18:30:00Z,Grazer AK,SCR Altach,SCR Altach +0.25,1.46,2-3,Landed,1
+2026-11-28T06:30:01Z,2026-11-27.1,f55cedfeb491,2026-11-27T19:45:00Z,Stade Brestois 29,Paris FC,Paris FC -0,1.67,1-0,Missed,0
+2026-11-28T06:30:01Z,2026-11-27.1,36bc975e2811,2026-11-27T20:00:00Z,Nottingham Forest,Chelsea,Nottingham Forest +0.25,1.72,3-2,Landed,1
+2026-11-28T06:30:01Z,2026-11-27.1,da744fb7e84b,2026-11-27T23:00:00Z,Fluminense,Cruzeiro,Cruzeiro +1,1.46,0-1,Landed,1
+2026-11-28T06:30:01Z,2026-11-27.2,d403fec605d2,2026-11-27T15:30:00Z,Universitatea Cluj,Sepsi OSK Sfantu Gheorghe,Sepsi OSK Sfantu Gheorghe +1,1.88,0-1,Landed,1
